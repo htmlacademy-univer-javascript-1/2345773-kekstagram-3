@@ -10,4 +10,4 @@ const permittedString = function (str, permLen){
   return true;
 };
 
-permittedString("Seven", 7);
+permittedString('Seven', 7);
