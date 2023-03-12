@@ -27,3 +27,5 @@ const getPhotoArray = function(){
     return result;
   }
 };
+
+getPhotoArray();
