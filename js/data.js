@@ -1,4 +1,4 @@
-import { randint } from "./util";
+import { randint } from './util';
 
 const getPhotoArray = function(){
   const result =[];
@@ -18,4 +18,4 @@ const getPhotoArray = function(){
 
 export{
   getPhotoArray
-}
+};

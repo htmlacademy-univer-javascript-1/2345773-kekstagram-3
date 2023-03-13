@@ -12,4 +12,4 @@ const permittedString = function (str, permLen){
 export{
   randint,
   permittedString
-}
+};
