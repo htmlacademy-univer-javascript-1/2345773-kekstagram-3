@@ -1,4 +1,4 @@
-import { getPhotoArray } from "./data.js";
+import { getPhotoArray } from './data.js';
 
 const miniaturesFragment = document.createDocumentFragment();
 
