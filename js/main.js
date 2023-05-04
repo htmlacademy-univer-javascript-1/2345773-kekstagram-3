@@ -1,3 +1,8 @@
 import './data.js';
 import './img.js';
-//Задание 7 часть 2
+import './util.js';
+import './validator.js';
+import './controller.js';
+import { imgIndex } from './img.js';
+
+imgIndex();

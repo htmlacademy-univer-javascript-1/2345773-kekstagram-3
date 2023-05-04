@@ -13,7 +13,12 @@ const permittedString = function (str, permLen){
   return true;
 };
 
+const isEsc = function (evt){
+  return evt.key === 'Escape';
+};
+
 export{
   randint,
-  permittedString
+  permittedString,
+  isEsc
 };
