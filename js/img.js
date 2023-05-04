@@ -4,19 +4,19 @@ const miniaturesFragment = document.createDocumentFragment();
 
 
 const miniaturesList = document.querySelector('.pictures');
-const miniaturesTemp = document.querySelector('#picture').content;
+const miniaturesTemp = document.querySelector('#picture').content.querySelector('.picture');
 
-const imgIndex = function (){
-  const simularMiniatures = getPhotoArray;
-  simularMiniatures.forEach(({url, likes, comments})=>{
+function imgIndex(){
+  const simularMiniatures = getPhotoArray();
+  simularMiniatures.forEach(({url, likes, comments}) => {
     const miniatures = miniaturesTemp.cloneNode(true);
     miniatures.querySelector('.picture__img').src = url;
     miniatures.querySelector('.picture__likes').textContent=likes;
-    miniatures.querySelector('.picture__comments').textContent=comments.length;
+    miniatures.querySelector('.picture__comments').textContent=comments;
     miniaturesFragment.appendChild(miniatures);
   });
   miniaturesList.appendChild(miniaturesFragment);
-};
+}
 export{
   imgIndex
 };

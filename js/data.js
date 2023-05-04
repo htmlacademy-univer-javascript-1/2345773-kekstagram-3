@@ -9,11 +9,11 @@ const getPhotoArray = function(){
         url: 'photos/'.concat(i+1, '.jpg'),
         description: '',
         likes: randint(15,200),
-        comments: randint(0,200)
+        comments: randint(1,200)
       }
     );
-    return result;
   }
+  return result;
 };
 
 export{
