@@ -1,31 +1,69 @@
 import { isEsc } from './util.js';
+import { validateForm } from './validator.js';
+import { defaultScale } from './scaleController.js';
+import {
+  openUploadSuccess,
+  closeUploadSuccess,
+  openUploadError,
+  closeUploadError
+} from './networkMessageController.js';
+import { defaultEffect } from './efectsController.js';
 
-const downloadButton = document.querySelector('#upload-file');
+const BACKEND_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
+
+const uploadButton = document.querySelector('#upload-file');
 const cancelButton = document.querySelector('#upload-cancel');
-const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
+const form = document.querySelector('.img-upload__form');
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  if (!validateForm()) {
+    return;
+  }
+  const formData = new FormData(evt.target);
+  fetch(
+    BACKEND_URL,
+    {
+      method: 'POST',
+      body: formData
+    }
+  )
+    .then((response) => {
+      if (response.ok) {
+        closeUploadPhotoWindow();
+        openUploadSuccess();
+      } else {
+        openUploadError();
+      }
+    })
+    .catch(openUploadError);
+});
 
 function cleanForm() {
-  downloadButton.value = '';
-  hashtagInput.value = '';
+  uploadButton.value = '';
   commentInput.value = '';
+  defaultScale();
+  defaultEffect();
 }
 
 function onFormEscapeKeyDown(evt) {
   if (isEsc(evt)) {
     evt.preventDefault();
-    closeDownloadPhotoWindow();
+    closeUploadPhotoWindow();
+    closeUploadError();
+    closeUploadSuccess();
   }
 }
 
-function openDownloadPhotoWindow() {
+function openUploadPhotoWindow() {
   document.querySelector('.img-upload__overlay').classList.remove('hidden');
   document.body.classList.add('modal-open');
-
   document.addEventListener('keydown', onFormEscapeKeyDown);
+
 }
 
-function closeDownloadPhotoWindow() {
+function closeUploadPhotoWindow() {
   document.querySelector('.img-upload__overlay').classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onFormEscapeKeyDown);
@@ -33,10 +71,6 @@ function closeDownloadPhotoWindow() {
 }
 
 
-downloadButton.addEventListener('change', () => {
-  openDownloadPhotoWindow();
-});
+uploadButton.addEventListener('change', openUploadPhotoWindow);
 
-cancelButton.addEventListener('click', () => {
-  closeDownloadPhotoWindow();
-});
+cancelButton.addEventListener('click', closeUploadPhotoWindow);

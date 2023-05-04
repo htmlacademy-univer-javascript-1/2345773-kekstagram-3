@@ -22,3 +22,12 @@ function changeImageScale(step) {
     imageView.style.scale = newScale / 100;
   }
 }
+
+function defaultScale(){
+  scaleValueField.value = '100%';
+  imageView.style.scale = 1;
+}
+
+export{
+  defaultScale
+};

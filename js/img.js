@@ -1,13 +1,20 @@
-import { getPhotoArray } from './data.js';
+import { getPhotos } from './data.js';
+import { showDownloadAlert } from './alert.js';
 
 const miniaturesFragment = document.createDocumentFragment();
 
 
 const miniaturesList = document.querySelector('.pictures');
-const miniaturesTemp = document.querySelector('#picture').content.querySelector('.picture');
+const miniaturesTemp = document.querySelector('#picture').content;
 
 function imgIndex(){
-  const simularMiniatures = getPhotoArray();
+  getPhotos(
+    drawProvidedPhotos,
+    showDownloadAlert
+  );
+}
+
+function drawProvidedPhotos(simularMiniatures) {
   simularMiniatures.forEach(({url, likes, comments}) => {
     const miniatures = miniaturesTemp.cloneNode(true);
     miniatures.querySelector('.picture__img').src = url;

@@ -16,6 +16,14 @@ let previousEffect = null;
 
 sliderBarField.hidden = true;
 
+function defaultEffect() {
+  imgElement.classList.remove(`effects__preview--${previousEffect}`);
+  if (previousEffect !== null){
+    imgElement.classList.add(`effects__preview--${Effects.Original}`);
+  }
+  previousEffect = currentEffect;
+}
+
 effectsItemList.addEventListener('change', (evt) => {
   currentEffect = evt.target.value;
   if (currentEffect === previousEffect) {
@@ -27,3 +35,7 @@ effectsItemList.addEventListener('change', (evt) => {
   imgElement.classList.add(`effects__preview--${currentEffect}`);
   previousEffect = currentEffect;
 });
+
+export{
+  defaultEffect
+};
