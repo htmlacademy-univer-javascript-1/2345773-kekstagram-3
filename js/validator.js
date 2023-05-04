@@ -1,4 +1,4 @@
-import { permittedString } from './util';
+import { permittedString } from './util.js';
 
 const form = document.querySelector('.img-upload__form');
 
