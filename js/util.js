@@ -1,24 +1,15 @@
-const randint = function (min, max){
-  if (max < min && max <= 0 && min < 0) {
-    return 0;
-  }
-  return Math.floor(Math.random() * (max - min + 1) + min);
+export const randomIntInRange = (min, max) => {
+  const a = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const b = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  return Math.floor(Math.random() * (b - a + 1) + a);
 };
 
+export const isEscKey = (evt) => evt.key ==='Escape';
 
-const permittedString = function (str, permLen){
-  if (str.length > permLen) {
-    return false;
-  }
-  return true;
-};
+export const findTemplate = (nameOfTemplate, nameOfElementInTemplate) =>
+  document
+    .querySelector(nameOfTemplate)
+    .content.querySelector(nameOfElementInTemplate);
 
-const isEsc = function (evt){
-  return evt.key === 'Escape';
-};
 
-export{
-  randint,
-  permittedString,
-  isEsc
-};
+export const stringLengthValidation = (string, length) => string.length <= length;

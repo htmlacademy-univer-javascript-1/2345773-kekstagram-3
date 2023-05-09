@@ -1,6 +1,4 @@
-const ALERT_SHOW_TIME = 5000;
-
-function showAlert(message) {
+export const alert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
@@ -18,17 +16,9 @@ function showAlert(message) {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, ALERT_SHOW_TIME);
-}
+  }, 6000);
+};
 
-function showDownloadAlert() {
-  showAlert('Couldn\'t download images');
-}
-
-function showUploadAlert() {
-  showAlert('Couldn\'t upload image');
-}
-
-export {
-  showAlert, showDownloadAlert, showUploadAlert
+export const downloadAlert = () =>{
+  alert('Image wasn\'t downloaded from the server');
 };
