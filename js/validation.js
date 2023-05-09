@@ -1,4 +1,4 @@
-import { permittedString } from './util.js';
+import { stringLengthValidation } from './util.js';
 
 const form = document.querySelector('.img-upload__form');
 
@@ -17,6 +17,12 @@ pristine.addValidator(
   'От 20 до 140 символов'
 );
 
+pristine.addValidator(
+  form.querySelector('.text__hashtags'),
+  validateHashtags,
+  '# и от 3 до 15 символов'
+);
+
 form.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
@@ -24,5 +30,11 @@ form.addEventListener('submit', (evt) => {
 });
 
 function validateComments(value) {
-  return !permittedString(value, 19) && permittedString(value, 140);
+  return !stringLengthValidation(value, 19) && stringLengthValidation(value, 140);
 }
+
+function validateHashtags(value){
+  return value[0]==='#' && !stringLengthValidation(value,3) && stringLengthValidation(value,15);
+}
+
+export const formIsValid = (silent = false) => pristine.validate(silent);

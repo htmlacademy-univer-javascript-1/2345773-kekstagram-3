@@ -1,21 +1,39 @@
-import { randint } from './util.js';
+const PHOTOS_URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+const URL_TO_SEND = 'https://27.javascript.pages.academy/kekstagram-simple';
 
-const getPhotoArray = function(){
-  const result =[];
-  for (let i = 0; i <=24; i++){
-    result.push(
-      {
-        id: i+1,
-        url: 'photos/'.concat(i+1, '.jpg'),
-        description: '',
-        likes: randint(15,200),
-        comments: randint(1,200)
+export const getPhotos = (onSuccess, onError) => {
+  fetch(PHOTOS_URL, {
+    method: 'GET',
+    credentials: 'same-origin',
+  })
+    .then((response) =>{
+      if(response.ok){
+        return response.json();
       }
-    );
-  }
-  return result;
+      else{
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+    })
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
+
 };
 
-export{
-  getPhotoArray
+export const sendData = (onSuccess, onError, body) => {
+  fetch(URL_TO_SEND,{
+    method: 'POST',
+    body,
+  })
+    .then((response)=>{
+      if(response.ok){
+        onSuccess();
+      } else {
+        onError();
+      }
+    })
+    .catch(onError);
 };
